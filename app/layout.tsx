@@ -1,4 +1,5 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic' // ✅ 배포 캐시 문제 방지
+
 import type { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
 import Header from '../components/Header'
@@ -15,9 +16,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
       <html lang="en">
-        {/* 배경 더 밝게 (slate-50) */}
         <body className="bg-slate-50">
           <Header />
           <main className="w-full flex justify-center">
